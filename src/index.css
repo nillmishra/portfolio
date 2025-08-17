@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+@import "tailwindcss";
+
+/* Dark-only tokens */
+@theme {
+  --color-brand: #0EEBB3;
+  --color-brand-600: #0bcf9d;
+  --color-brand-700: #09b18a;
+
+  --color-navy: #0a192f;
+  --color-light-navy: #112240;
+}
+
+html { scroll-behavior: smooth; }
+:root { color-scheme: dark; }
+
+@layer components {
+  .section-container { @apply max-w-6xl mx-auto px-4 py-16; }
+  .section-title { @apply text-3xl font-bold text-slate-100 mb-8; }
+  .nav-link { @apply text-slate-300 hover:text-brand transition-colors; }
+  .text-slate { @apply text-slate-300; }
+  .text-lightest-slate { @apply text-slate-100; }
+  .vertical-text { writing-mode: vertical-rl; text-orientation: mixed; }
+}
+
+header { transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1); }
+header.is-hidden { transform: translateY(-100%); }
+
+@media (max-width: 768px) {
+  .footer {
+    display: block;
+    width: 100%;
+    max-width: 270px;
+    margin: 0 auto 10px;
+    color: black;
+  }
+}
+
+.no-scroll { overflow: hidden; }
+

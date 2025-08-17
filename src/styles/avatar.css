@@ -1,0 +1,40 @@
+.avatar-container {
+  width: 600px;
+  max-width: 90vw;
+  margin: 0 auto;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar-container .bg {
+  fill: var(--color-brand);
+  transition: fill .3s ease;
+}
+
+.avatar-container .me {
+  animation: float 6s ease-in-out infinite;
+  transform-origin: center;
+  opacity: 0; /* fades in via Web Animations API */
+}
+
+.avatar-container .ear-right { transform-origin: 0% 50%; }
+.avatar-container .ear-left  { transform-origin: 100% 50%; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) }
+  50%      { transform: translateY(-10px) }
+}
+@keyframes blink { 0%,90%,100% {transform:scaleY(1)} 95%{transform:scaleY(0.1)} }
+@keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+@keyframes glassesGlare { 0%,100%{opacity:.48} 50%{opacity:.6} }
+
+.avatar-container .eye { animation: blink 4s infinite; transform-origin: center; }
+.avatar-container .body { animation: breathe 4s ease-in-out infinite; transform-origin: center; }
+.avatar-container .glasses { animation: glassesGlare 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-container .me,
+  .avatar-container .eye,
+  .avatar-container .body,
+  .avatar-container .glasses { animation: none !important; }
+}
