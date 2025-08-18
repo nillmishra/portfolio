@@ -1,0 +1,14 @@
+/* Card sized by --avatar-size and stays responsive */
+.crisp-tilt .crisp-tilt-card {
+  width: min(var(--avatar-size, 270px), 90vw);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  /* Smooth-moving shadow via variables (no filters, no transforms) */
+  box-shadow: var(--sx, 0px) var(--sy, 8px) 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Ensure no filters sneak in and force rasterization */
+.crisp-tilt, .crisp-tilt * {
+  filter: none !important;
+}

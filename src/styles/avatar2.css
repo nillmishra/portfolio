@@ -1,0 +1,49 @@
+/* Brand fallback */
+.avatar2 { --brand: var(--color-brand, #0EEBB3); }
+
+/* No GPU promotion; keep vectors crisp */
+.avatar2,
+.avatar2 svg {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* SVG fills the card */
+.avatar2 svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  shape-rendering: geometricPrecision; /* high quality edges */
+  text-rendering: optimizeLegibility;
+}
+
+/* Theme */
+.avatar2 [id="Circle-Background"] { fill: var(--brand) !important; }
+.avatar2 [id="🖍-Circle-Color"] rect { fill: var(--brand) !important; opacity: 0.18; }
+
+/* Hoodie color */
+.avatar2 #Hoodie,
+.avatar2 [id="Color/Palette/Slate"] rect { fill: #0f3d39 !important; }
+
+/* Face parallax controlled by SVG transform attribute */
+.avatar2 .face-parallax { transition: none; }
+
+/* Subtle idle animations */
+@keyframes a2-blink { 0%,96%,100%{transform:scaleY(1)} 97%{transform:scaleY(0.35)} }
+@keyframes a2-smile { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-0.6px)} }
+@keyframes a2-brows { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-1px)} }
+@keyframes a2-breathe{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(0)} }
+
+.avatar2 .eyes-anim     { animation: a2-blink 4.8s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.avatar2 .mouth-anim    { animation: a2-smile 5.2s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.avatar2 .brows-anim    { animation: a2-brows 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.avatar2 .clothing-anim { animation: a2-breathe 4.8s ease-in-out infinite; transform-origin: 50% 50%; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .avatar2 .face-parallax,
+  .avatar2 .eyes-anim,
+  .avatar2 .mouth-anim,
+  .avatar2 .brows-anim,
+  .avatar2 .clothing-anim { animation: none !important; transition: none !important; }
+}

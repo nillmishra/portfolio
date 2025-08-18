@@ -39,7 +39,8 @@ export default function Skills() {
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
       {data.map((item) => (
         <div key={item.name} className="p-4 rounded-lg shadow-md text-center flex flex-col items-center bg-light-navy/30 border border-slate-800">
-          <img src={item.logo} alt={item.name} className={`h-10 w-10 mb-2 transition-transform duration-300 transform hover:scale-110 ${item.invert ? "invert" : ""}`} />
+          <img src={item.logo} alt={item.name}
+               className={`h-10 w-10 mb-2 transition-transform duration-300 transform hover:scale-110 ${item.invert ? "invert" : ""}`} />
           <span className="font-semibold text-lightest-slate">{item.name}</span>
         </div>
       ))}
@@ -47,19 +48,19 @@ export default function Skills() {
   );
 
   return (
-    <section className="section-container">
-      <h3 className="text-2xl font-semibold mb-4">Skills</h3>
+    <section id="skills" className="section-container scroll-mt-0">
+      <h2 className="text-4xl font-bold text-white mb-6 mt-0">Skills</h2>
 
-      <h4 className="text-xl font-semibold mb-2">Front-end</h4>
+      <h4 className="text-xl font-semibold mb-4 text-brand">Front-end</h4>
       <Grid data={frontends} />
 
-      <h4 className="text-xl font-semibold mb-2 mt-8">Back-end</h4>
+      <h4 className="text-xl font-semibold mb-4 mt-8 text-brand">Back-end</h4>
       <Grid data={backends} />
 
-      <h4 className="text-xl font-semibold mb-2 mt-8">Database</h4>
+      <h4 className="text-xl font-semibold mb-4 mt-8 text-brand">Database</h4>
       <Grid data={databases} />
 
-      <h4 className="text-xl font-semibold mb-2 mt-8">Ops</h4>
+      <h4 className="text-xl font-semibold mb-4 mt-8 text-brand">Ops</h4>
       <Grid data={opss} />
     </section>
   );

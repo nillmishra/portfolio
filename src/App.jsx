@@ -4,7 +4,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Navbar from "./components/Navbar.jsx";
-import Sidebar from "./components/Sidebar.jsx";
 import Footer from "./components/Footer.jsx";
 import GoogleAnalytics from "./components/GoogleAnalytics.jsx";
 
@@ -27,7 +26,6 @@ export default function App() {
       <GoogleAnalytics />
       <ScrollToTop />
       <Navbar />
-      <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/project" element={<ProjectsPage />} />
