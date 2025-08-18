@@ -20,17 +20,18 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", open);
+    return () => document.body.classList.remove("no-scroll");
   }, [open]);
 
   const closeMenu = () => setOpen(false);
 
-  // Reusable class for the thin brand underline on hover
+  // Only show the underline on md+ (desktop)
   const underline =
-    "nav-link relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-brand after:transition-[width] after:duration-200 hover:after:w-full focus-visible:after:w-full rounded-lg";
+    "nav-link relative rounded-lg md:after:content-[''] md:after:absolute md:after:left-0 md:after:-bottom-1 md:after:h-[1.5px] md:after:w-0 md:after:bg-brand md:after:transition-[width] md:after:duration-200 hover:md:after:w-full focus-visible:md:after:w-full";
 
   return (
     <header className={hidden ? "is-hidden" : ""}>
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur border-b border-slate-800">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur border-b border-slate-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20">
             {/* Logo */}
@@ -68,51 +69,63 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
-        {/* Mobile overlay */}
-        <div
-          className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all ${
-            open ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-          onClick={closeMenu}
-        />
-
-        {/* Mobile drawer */}
-        <div
-          className={`md:hidden fixed right-0 top-0 w-[min(75vw,320px)] h-full z-50 bg-black shadow-xl transform transition-all duration-300 ${
-            open ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <div className="flex justify-between items-center px-6 py-4 border-b border-gray-800">
-            <span className="text-lg font-semibold text-slate-200">Menu</span>
-            <button
-              onClick={closeMenu}
-              className="p-2 text-brand hover:brightness-95 rounded-lg"
-              aria-label="Close menu"
-            >
-              <FiX className="w-6 h-6" />
-            </button>
-          </div>
-
-          <div className="flex flex-col p-8 space-y-6">
-            <Link to="/" className={underline} onClick={closeMenu}>
-              Home
-            </Link>
-            <a href="/#about-me" className={underline} onClick={closeMenu}>
-              About Me
-            </a>
-            <a href="/#skills" className={underline} onClick={closeMenu}>
-              Skills
-            </a>
-            <a href="/#projects" className={underline} onClick={closeMenu}>
-              Projects
-            </a>
-            <a href="/#contact" className={underline} onClick={closeMenu}>
-              Contact
-            </a>
-          </div>
-        </div>
       </nav>
+
+      {/* Mobile layer (no full-screen blur or black) */}
+      <div
+        className={`md:hidden fixed inset-0 z-[90] ${open ? "" : "pointer-events-none"}`}
+        aria-hidden={!open}
+      >
+        <div className="h-full w-full flex justify-end">
+          {/* Transparent click-catcher to close when tapping outside the drawer */}
+          <button
+            className="flex-1 h-full bg-transparent"
+            onClick={closeMenu}
+            aria-label="Close menu"
+            tabIndex={-1}
+          />
+          {/* Drawer: only this area is dark + blurred */}
+          <aside
+            className={`h-full w-[min(75vw,320px)] transform transition-transform duration-300 
+              ${open ? "translate-x-0" : "translate-x-full"}
+              bg-black/60 backdrop-blur-xl border-l border-slate-800 shadow-2xl
+            `}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile menu"
+          >
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-800">
+              <span className="text-lg font-semibold text-slate-200">Menu</span>
+              <button
+                onClick={closeMenu}
+                className="p-2 text-brand hover:brightness-95 rounded-lg"
+                aria-label="Close menu"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="flex flex-col p-8 space-y-6">
+              {/* No underline class on mobile items */}
+              <Link to="/" className="text-brand font-medium" onClick={closeMenu}>
+                Home
+              </Link>
+              <a href="/#about-me" className="text-brand font-medium" onClick={closeMenu}>
+                About Me
+              </a>
+              <a href="/#skills" className="text-brand font-medium" onClick={closeMenu}>
+                Skills
+              </a>
+              <a href="/#projects" className="text-brand font-medium" onClick={closeMenu}>
+                Projects
+              </a>
+              <a href="/#contact" className="text-brand font-medium" onClick={closeMenu}>
+                Contact
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
     </header>
   );
 }

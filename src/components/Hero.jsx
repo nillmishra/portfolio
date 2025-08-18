@@ -69,7 +69,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="min-h-[calc(100vh-80px)] flex items-center px-4 sm:px-6 lg:px-8 pt-12 md:pt-22">
+   <section className="min-h-[calc(100vh-80px)] flex items-center px-4 sm:px-6 lg:px-8 pt-12 md:pt-22 mt-[80px] md:mt-0">
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left: Intro */}
