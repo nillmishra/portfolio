@@ -24,6 +24,10 @@ export default function Navbar() {
 
   const closeMenu = () => setOpen(false);
 
+  // Reusable class for the thin brand underline on hover
+  const underline =
+    "nav-link relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1.5px] after:w-0 after:bg-brand after:transition-[width] after:duration-200 hover:after:w-full focus-visible:after:w-full rounded-lg";
+
   return (
     <header className={hidden ? "is-hidden" : ""}>
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur border-b border-slate-800">
@@ -43,11 +47,11 @@ export default function Navbar() {
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="nav-link">Home</Link>
-              <a href="/#about-me" className="nav-link">About Me</a>
-              <a href="/#skills" className="nav-link">Skills</a>
-              <a href="/#projects" className="nav-link">Projects</a>
-              <a href="/#contact" className="nav-link">Contact</a>
+              <Link to="/" className={underline}>Home</Link>
+              <a href="/#about-me" className={underline}>About Me</a>
+              <a href="/#skills" className={underline}>Skills</a>
+              <a href="/#projects" className={underline}>Projects</a>
+              <a href="/#contact" className={underline}>Contact</a>
             </div>
 
             {/* Mobile menu button */}
@@ -56,14 +60,20 @@ export default function Navbar() {
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? <FiX className="text-brand w-6 h-6" /> : <FiMenu className="text-brand w-6 h-6" />}
+              {open ? (
+                <FiX className="text-brand w-6 h-6" />
+              ) : (
+                <FiMenu className="text-brand w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile overlay */}
         <div
-          className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all ${open ? "opacity-100 visible" : "opacity-0 invisible"}`}
+          className={`md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-all ${
+            open ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
           onClick={closeMenu}
         />
 
@@ -75,17 +85,31 @@ export default function Navbar() {
         >
           <div className="flex justify-between items-center px-6 py-4 border-b border-gray-800">
             <span className="text-lg font-semibold text-slate-200">Menu</span>
-            <button onClick={closeMenu} className="p-2 text-brand hover:brightness-95 rounded-lg" aria-label="Close menu">
+            <button
+              onClick={closeMenu}
+              className="p-2 text-brand hover:brightness-95 rounded-lg"
+              aria-label="Close menu"
+            >
               <FiX className="w-6 h-6" />
             </button>
           </div>
 
           <div className="flex flex-col p-8 space-y-6">
-            <Link to="/" className="nav-link" onClick={closeMenu}>Home</Link>
-            <a href="/#about-me" className="nav-link" onClick={closeMenu}>About Me</a>
-            <a href="/#skills" className="nav-link" onClick={closeMenu}>Skills</a>
-            <a href="/#projects" className="nav-link" onClick={closeMenu}>Projects</a>
-            <a href="/#contact" className="nav-link" onClick={closeMenu}>Contact</a>
+            <Link to="/" className={underline} onClick={closeMenu}>
+              Home
+            </Link>
+            <a href="/#about-me" className={underline} onClick={closeMenu}>
+              About Me
+            </a>
+            <a href="/#skills" className={underline} onClick={closeMenu}>
+              Skills
+            </a>
+            <a href="/#projects" className={underline} onClick={closeMenu}>
+              Projects
+            </a>
+            <a href="/#contact" className={underline} onClick={closeMenu}>
+              Contact
+            </a>
           </div>
         </div>
       </nav>

@@ -4,7 +4,7 @@ import AvatarSvg from "./AvatarSvg.jsx";
 import FloatingIcons from "./FloatingIcons.jsx";
 import "../styles/hero-orbit.css";
 import Type from "./Type";
-
+import Resume from "../assets/resume2.pdf";
 
 export default function Hero() {
   const stageRef = useRef(null);
@@ -91,7 +91,16 @@ export default function Hero() {
             </p>
             <div className="flex gap-4 justify-center md:justify-start">
               <a href="#projects" className="inline-block px-6 py-3 rounded bg-brand text-black font-semibold hover:brightness-95 transition">View Projects</a>
-              <a href="#contact" className="inline-block px-6 py-3 rounded border border-brand text-brand hover:bg-brand/10 transition">Resume</a>
+              <a
+  href={Resume}
+  download="Nill_Mishra_Resume.pdf"
+  aria-label="Download Nill Mishra's resume"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block px-6 py-3 rounded border border-brand text-brand hover:bg-brand/10 transition"
+>
+  Resume
+</a>
             </div>
           </div>
 

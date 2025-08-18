@@ -1,42 +1,64 @@
+import CropGuard from "../assets/cropguardAI.jpg";
+import Myface from "../assets/MYFACE.png";
+import QuickFood from "../assets/quickfood.jpg";
+import Portfolio from "../assets/portfolio.jpg";
+
+
 export const projects = [
   {
-    title: "Media Management Platform",
+    title: "KisanSuraksha CropGuard AI",
     description: [
-      "Tackled the complexities of media planning across diverse channels.",
-      "Streamlined process to minimize errors and ensure compliance."
+      "Built a full-stack plant care app using React, Node.js, and Flask APIs for farm management.",
+      "Used CNNs with TensorFlow and Pillow to predict plant diseases from images.",
+      "Integrated Razorpay to let users instantly purchase medicines for detected plant issues.",
+      "Improved AI accuracy using data augmentation and regularly updated disease datasets.",
     ],
-    techStack: ["Angular", ".NET Framework", "SQL Server", "Microsoft IIS", "Firebase", "CI/CD"],
-    image: "/assets/media-management-platform.webp",
+    techStack: ["React", "TailwindCSS", "MongoDB", "Flask", "Python", "Node.js", "Razorpay"],
+    image: CropGuard,
     aosImage: "fade-right",
+    repo: "https://github.com/nillmishra/Kishan-Suraksha",
+    live: "https://kishan-suraksha.vercel.app/"
   },
   {
-    title: "Smile Analysis Web Application",
+    title: "Quick Food - Food Delivery App",
     description: [
-      "Smile detection app for elderly residents using CV + ML.",
-      "Angular frontend + Flask backend for real-time analysis."
+      "Developed a full-stack food delivery app with React, Node.js, and MongoDB.",
+      "Implemented user authentication, restaurant listings, and order management.",
+      "Using Swiggy API for real-time order tracking and delivery updates.",
+      "Designed a responsive UI with Tailwind CSS for seamless user experience.",
     ],
-    techStack: ["Angular", "Python", "SQL Server", "AWS"],
-    image: "/assets/smile-project.webp",
-    aosImage: "fade-left",
-  },
-  {
-    title: "AI Receptionist",
-    description: [
-      "Multilingual AI avatar for hotel front desks to automate processes.",
-      "Improves guest experience and streamlines operations."
-    ],
-    techStack: ["Node.js", "Python", "OpenAI API", "Nginx"],
-    image: "/assets/ai-receptionist.webp",
+    techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Swiggy API"],
+    image: QuickFood,
     aosImage: "fade-right",
+    repo: "https://github.com/youruser/media-management-platform",
+    live: "https://media-platform-demo.vercel.app"
   },
   {
-    title: "DocuQuery AI",
+    title: "Nill Mishra - Portfolio",
     description: [
-      "AI-powered document Q&A for uploaded PDFs.",
-      "Role-based access control and smooth document processing."
+      "Created a personal portfolio website to showcase my skills and projects.",
+      "Implemented a responsive design using React and Tailwind CSS.",
+      "Featured my projects with detailed descriptions and tech stacks.",
+      "used 3d tilt effect for the avatar image using react-parallax-tilt.",
     ],
-    techStack: ["Angular", "Tailwind CSS", "Flask", "MongoDB", "AWS"],
-    image: "/assets/docu-query-ai.webp",
-    aosImage: "fade-left",
+    techStack: ["React", "Tailwind CSS", "JavaScript", "React Parallax Tilt"],
+    image: Portfolio,
+    aosImage: "fade-right",
+    repo: "https://github.com/youruser/media-management-platform",
+    live: "https://media-platform-demo.vercel.app"
+  },
+  {
+    title: "Face Recognition Attendance Master",
+    description: [
+      "Built an automated attendance system using face recognition with OpenCV and Python.",
+      "Trained the model to detect and recognize faces from real-time webcam input.",
+      "Integrated attendance logging with date and time into a CSV or database.",
+      "Designed a simple GUI for user interaction and live attendance tracking.",
+    ],
+    techStack: ["Python", "Mahine Learning", "Open CV", "Flask", "Face-Recogination"],
+    image: Myface,
+    aosImage: "fade-right",
+    repo: "https://github.com/youruser/media-management-platform",
+    live: "https://media-platform-demo.vercel.app"
   },
 ];

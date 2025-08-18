@@ -12,31 +12,26 @@ export default function About() {
             LET ME <span className="text-brand">INTRODUCE</span> MYSELF
           </h2>
 
-          text
-
           <div className="space-y-5 max-w-3xl">
             <p className="text-slate text-lg">
-              Hi! I’m <span className="text-brand font-semibold">Nill Mishra</span>, a full‑stack developer
-              specializing in <span className="text-brand">.NET, Angular, and SQL Server</span>.
-              I love building efficient, dependable web apps and clean deployments.
+              I’m <span className="text-brand font-semibold">Nill Mishra</span>, an AIML engineering student
+              focused on building practical tech that improves everyday life. I enjoy turning ideas into real products,
+              learning fast, and collaborating in teams to deliver meaningful impact.
             </p>
 
             <p className="text-slate text-lg">
-              I fell in love with programming and I keep learning every day. I’m fluent in
-              <i> <b className="text-brand"> C++, JavaScript, and Go</b> </i>.
-              My interests include building new <b className="text-brand">Web Technologies & Products</b> and
-              exploring <b className="text-brand">Blockchain</b>.
+              My core stack spans <span className="text-brand">C, C++, JavaScript, and Python</span> with hands‑on work across{" "}
+              <span className="text-brand">React.js, Next.js, Node.js, Flask</span> and databases like{" "}
+              <span className="text-brand">SQL</span> and <span className="text-brand">MongoDB</span>. I’m comfortable with{" "}
+              <span className="text-brand">Docker</span>, <span className="text-brand">Git/GitHub</span>, and write code with solid{" "}
+              <span className="text-brand">OOP</span> foundations.
             </p>
 
             <p className="text-slate text-lg">
-              Whenever possible, I apply my passion for developing with <b className="text-brand">Node.js</b> and
-              <i> <b className="text-brand"> modern JavaScript libraries/frameworks</b> </i> like
-              <i> <b className="text-brand"> React.js</b> </i> and <i> <b className="text-brand"> Next.js</b> </i>.
-            </p>
-
-            <p className="text-slate text-lg">
-              I focus on performance, accessibility, developer experience, and shipping scalable,
-              user‑centric solutions with modern tooling.
+              In AI/ML, I work with tools like <span className="text-brand">TensorFlow</span> and{" "}
+              <span className="text-brand">OpenCV</span>. I’m driven by performance, accessibility, and developer experience—always aiming for clean delivery and
+              scalable, user‑centric solutions. I’m excited to contribute, grow, and take on opportunities where I can
+              learn and ship value quickly.
             </p>
           </div>
         </div>
@@ -47,8 +42,6 @@ export default function About() {
         </div>
       </div>
 
-      text
-
       {/* Social links */}
       <div className="mt-12">
         <h3 className="text-xl font-semibold text-lightest-slate text-center md:text-left">FIND ME ON</h3>
@@ -58,7 +51,7 @@ export default function About() {
         <ul className="mt-4 flex flex-wrap items-center gap-4 justify-center md:justify-start">
           <li>
             <a
-              href="https://github.com/yourhandle"
+              href="https://github.com/nillmishra"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -69,7 +62,7 @@ export default function About() {
           </li>
           <li>
             <a
-              href="https://twitter.com/yourhandle"
+              href="https://twitter.com/inillmishra"
               target="_blank"
               rel="noreferrer"
               aria-label="Twitter"
@@ -80,7 +73,7 @@ export default function About() {
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/yourhandle"
+              href="https://www.linkedin.com/in/nillotpal-mishra-955098248"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -91,7 +84,7 @@ export default function About() {
           </li>
           <li>
             <a
-              href="https://instagram.com/yourhandle"
+              href="https://www.instagram.com/nillmishra?igsh=YndmcTg1cno1eG9q"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"

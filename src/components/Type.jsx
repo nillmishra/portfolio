@@ -6,7 +6,9 @@ export default function Type() {
       options={{
         strings: [
           "Software Developer",
+          "Frontend Developer",
           "Freelancer",
+          "Content Creator",
         ],
         autoStart: true,
         loop: true,

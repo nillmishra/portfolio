@@ -50,7 +50,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-container text-center">
-      <h2 className="section-title justify-center">What's Next?</h2>
+      <h2 className="section-title justify-center text-brand">What's Next?</h2>
       <h3 className="text-4xl font-bold text-lightest-slate mb-4">Get In Touch</h3>
       <p className="text-slate max-w-lg mx-auto mb-12">
         Let’s chat! Whether you have a question, a project idea, or just want to connect, I’m always happy to hear from you.
