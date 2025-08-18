@@ -1,11 +1,65 @@
+import { useEffect, useRef, useState } from "react";
 import { projects } from "../data/projects";
 import { FaGithub } from "react-icons/fa";
 import { SiVercel } from "react-icons/si";
+
+// LazyImage component with IntersectionObserver + fade-in + skeleton
+function LazyImage({ src, alt, className }) {
+  const wrapperRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    if (!("IntersectionObserver" in window)) {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapperRef} className="relative w-full h-full">
+      {inView && (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          className={`transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"} ${className}`}
+        />
+      )}
+      {!loaded && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-slate-800/40 animate-pulse"
+        />
+      )}
+    </div>
+  );
+}
 
 export default function Projects() {
   return (
     <section id="projects" className="section-container">
       <h2 className="section-title text-brand">Things I've worked on</h2>
+
+      text
 
       <div className="space-y-24">
         {projects.map((project) => (
@@ -13,10 +67,9 @@ export default function Projects() {
             {/* Left: image + buttons */}
             <div className="md:col-span-7 relative">
               <div className="relative h-[300px] rounded overflow-hidden">
-                <img
+                <LazyImage
                   src={project.image}
                   alt={`${project.title} project image`}
-                  loading="lazy"
                   className="w-full h-full object-cover brightness-80 hover:brightness-100 transition-all duration-300"
                 />
               </div>

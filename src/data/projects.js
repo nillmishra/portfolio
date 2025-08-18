@@ -30,7 +30,7 @@ export const projects = [
     techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Swiggy API"],
     image: QuickFood,
     aosImage: "fade-right",
-    repo: "https://github.com/youruser/media-management-platform",
+    repo: "https://github.com/nillmishra/Food-Delivery-App",
     live: "https://media-platform-demo.vercel.app"
   },
   {
@@ -44,8 +44,8 @@ export const projects = [
     techStack: ["React", "Tailwind CSS", "JavaScript", "React Parallax Tilt"],
     image: Portfolio,
     aosImage: "fade-right",
-    repo: "https://github.com/youruser/media-management-platform",
-    live: "https://media-platform-demo.vercel.app"
+    repo: "https://github.com/nillmishra/portfolio",
+    live: "https://portfolio-self-one-83.vercel.app/"
   },
   {
     title: "Face Recognition Attendance Master",
@@ -58,7 +58,7 @@ export const projects = [
     techStack: ["Python", "Mahine Learning", "Open CV", "Flask", "Face-Recogination"],
     image: Myface,
     aosImage: "fade-right",
-    repo: "https://github.com/youruser/media-management-platform",
+    repo: "https://github.com/nillmishra/Face-Recoginition",
     live: "https://media-platform-demo.vercel.app"
   },
 ];
