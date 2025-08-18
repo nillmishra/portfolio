@@ -122,14 +122,18 @@ export default function AvatarSvg() {
 
         <g clipPath="url(#background-clip)">
           <g className="me">
-            <g className="body">
+            <g className="">
+              <g className="body">
               <path className="shadow" d="M130,40c6,4,14,10,18,20s4,16,4,16-3,8-6,12-7,9-7,9-4-7-8-8.5c-4-2.5-7,6-10,7s-12,3-16,2-14-4-18-5c-4-1.5-7-2-9-5s-3-7-2-9,2-6,2-6l-5-3c-3-2.5-3,6-3,6s-4-4-6-6c-2.5-2.5-2-9,1.5-11.5s7-5,13-6.5,16-9,16-9,11-9,22-9S125,43,127,40Z" opacity="0.12" style={{ isolation: "isolate" }} />
               <path className="hair-back hair" d="M125,40c6,4,14,10,18,20s4,16,4,16-3,8-6,12-7,9-7,9-4-7-8-8.5c-4-2.5-7,6-10,7s-12,3-16,2-14-4-18-5c-4-1.5-7-2-9-5s-3-7-2-9,2-6,2-6l-5-3c-3-2.5-3,6-3,6s-4-4-6-6c-2.5-2.5-2-9,1.5-11.5s7-5,13-6.5,16-9,16-9,11-9,22-9S125,43,127,40Z" fill="#3C2A17" />
-              <path className="neck" d="M114.26 143.16v-5a9.22 9.22 0 10-18.43 0v5c-15.27 2.84-24.74 15.08-24.74 27.33H139c0-12.24-9.5-24.49-24.74-27.33z" fill="#e4e2d8" />
+              <path className="neck" d="M114.26 143.16v-5a9.22 9.22 0 10-18.43 0v5c-15.27 2.84-24.74 15.08-24.74 27.33H139c0-12.24-9.5-24.49-24.74-27.33z" fill="#e9d0c2" />
               <path className="top" d="M112.61 160c-35.17 0-30.36-35-30.36 20.84h15.35l30-2.14c-.05-55.79 5.17-18.7-29.99-18.7z" strokeWidth="1" />
               <path className="shoulder" d="M90.82 142.87c-21 1.84-34.37 19.5-34.37 40h34.37z" />
               <path className="shoulder" d="M119.23 142.67c20.76 1.85 34 19.6 34 40.2h-34z" />
             </g>
+
+            </g>
+            
 
             <path className="shadow" d="M95.82 122.36h18.41v14.31s-10.5 5.54-18.41 0z" fill="#e9d0c2" />
 
@@ -144,7 +148,7 @@ export default function AvatarSvg() {
               </g>
 
               <g className="face">
-                <rect x="73.99" y="48.26" width="61.54" height="80.49" rx="26.08" transform="rotate(180 104.76 88.5)" fill="#e4e2d8" />
+                <rect x="73.99" y="48.26" width="61.54" height="80.49" rx="26.08" transform="rotate(180 104.76 88.5)" fill="#f2ddd0" />
                 <g className="inner-face">
                   <path className="eyebrow-right" d="M120.73 79a9 9 0 00-4-1.22 9.8 9.8 0 00-4.19.87" fill="none" stroke="#3C2A17" strokeWidth="3" />
                   <path className="eyebrow-left" d="M97.12 79.41a9.53 9.53 0 00-4-1.11 10.58 10.58 0 00-4.2.76" fill="none" stroke="#3C2A17" strokeWidth="3" />
