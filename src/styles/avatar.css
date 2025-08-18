@@ -18,11 +18,11 @@
 }
 
 .avatar-container .ear-right { transform-origin: 0% 50%; }
-.avatar-container .ear-left  { transform-origin: 100% 50%; }
+.avatar-container .ear-left { transform-origin: 100% 50%; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0) }
-  50%      { transform: translateY(-10px) }
+  50% { transform: translateY(-10px) }
 }
 @keyframes blink { 0%,90%,100% {transform:scaleY(1)} 95%{transform:scaleY(0.1)} }
 @keyframes breathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }

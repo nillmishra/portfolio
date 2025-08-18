@@ -1,0 +1,107 @@
+/* Floating icons and tilt styles (scoped) */
+.hero-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 250ms ease;
+}
+
+.hero-stage {
+  position: relative;
+  width: min(640px, 90vw);
+  aspect-ratio: 1 / 1;
+  overflow: visible; /* allow some icons to sit outside */
+}
+
+/* Subtle teal “blob” behind avatar (not a gradient wrapper) */
+.hero-blob {
+  position: absolute;
+  inset: 10% 5% 25% 5%;
+  background:
+    radial-gradient(60% 60% at 40% 50%, rgba(14, 235, 179, 0.25), transparent 70%),
+    radial-gradient(60% 60% at 70% 50%, rgba(14, 235, 179, 0.18), transparent 70%);
+  filter: blur(2px);
+  z-index: 0;          /* keep this underneath */
+  pointer-events: none;
+}
+
+
+
+/* Icons (on top) */
+.icon-badge {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+
+  /* requested colors */
+  color: #fff; /* icon color — switch to #cbd5e1 if you want gray */
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  transform: translateZ(40px);
+  will-change: transform, background, box-shadow;
+  z-index: 3; /* above avatar and blob */
+  transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.icon-badge:hover,
+.icon-badge:focus-visible {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateZ(40px) translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  outline: none;
+}
+
+/* Gentle float */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0) translateZ(40px); }
+  50% { transform: translateY(-10px) translateZ(40px); }
+}
+
+
+/* Add (or keep) this */
+/* Positioning wrapper for orbit */
+.icon-wrap {
+  position: absolute;
+  z-index: 3;
+  will-change: top, left, transform;
+  pointer-events: none; /* wrapper ignores events */
+}
+.icon-wrap .icon-badge {
+  pointer-events: auto; /* link remains clickable */
+}
+
+/* stagger helpers */
+.float-1 { animation: floatY 4.5s ease-in-out infinite; }
+.float-2 { animation: floatY 5.2s ease-in-out infinite; }
+.float-3 { animation: floatY 4.2s ease-in-out infinite; }
+.float-4 { animation: floatY 6.0s ease-in-out infinite; }
+.float-5 { animation: floatY 5.6s ease-in-out infinite; }
+.float-6 { animation: floatY 4.8s ease-in-out infinite; }
+.float-7 { animation: floatY 5.0s ease-in-out infinite; }
+.float-8 { animation: floatY 6.3s ease-in-out infinite; }
+.float-9  { animation: floatY 5.4s ease-in-out infinite; }
+.float-10 { animation: floatY 4.4s ease-in-out infinite; }
+.float-11 { animation: floatY 6.1s ease-in-out infinite; }
+.float-12 { animation: floatY 5.8s ease-in-out infinite; }
+
+/* Optional: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .icon-badge { animation: none !important; }
+}
+
+/* Slight color tint to the avatar to match the teal palette */
+.avatar-container .top,
+.avatar-container .shoulder {
+  fill: #0f3d39 !important; /* dark teal shirt/shoulders */
+  stroke: #0f3d39 !important;
+}
+
+/* Glasses/glare a bit more visible on dark bg */
+.avatar-container .glasses { opacity: .6; }

@@ -11,8 +11,6 @@ export default function AvatarSvg() {
     const q = (sel) => container.querySelector(sel);
 
     const me = q(".me");
-    const earRight = q(".ear-right");
-    const earLeft = q(".ear-left");
     const head = q(".head");
     const hair = q(".hair");
     const shadow = q(".shadow");
@@ -28,30 +26,24 @@ export default function AvatarSvg() {
     const hairFront = q(".hair-front");
     const hairBack = q(".hair-back");
     const ears = container.querySelectorAll(".ear");
+    const bodyGroup = q(".body"); // only move this as a group!
 
     if (!reduceMotion && me) {
+      // intro animations
       me.animate(
         [{ opacity: 0, transform: "translateY(100%)" }, { opacity: 1, transform: "translateY(0)" }],
         { duration: 1000, easing: "cubic-bezier(0.25,0.46,0.45,0.94)", fill: "forwards", delay: 300 }
       );
-
       [head, hair, shadow].forEach((el) => {
-        if (!el) return;
-        el.animate([{ transform: "translateY(20%)" }, { transform: "translateY(0)" }],
+        el?.animate([{ transform: "translateY(20%)" }, { transform: "translateY(0)" }],
           { duration: 900, easing: "cubic-bezier(0.25,0.46,0.45,0.94)", fill: "forwards", delay: 400 });
       });
-
-      if (glasses) {
-        glasses.animate([{ transform: "translateY(-10%)" }, { transform: "translateY(0)" }],
-          { duration: 1000, easing: "cubic-bezier(0.25,0.46,0.45,0.94)", fill: "forwards", delay: 550 });
-      }
-
+      glasses?.animate([{ transform: "translateY(-10%)" }, { transform: "translateY(0)" }],
+        { duration: 1000, easing: "cubic-bezier(0.25,0.46,0.45,0.94)", fill: "forwards", delay: 550 });
       [eyebrowRight, eyebrowLeft].forEach((el) => {
-        if (!el) return;
-        el.animate([{ transform: "translateY(300%)" }, { transform: "translateY(0)" }],
+        el?.animate([{ transform: "translateY(300%)" }, { transform: "translateY(0)" }],
           { duration: 1000, easing: "cubic-bezier(0.25,0.46,0.45,0.94)", fill: "forwards" });
       });
-
       [eyeRight, eyeLeft].forEach((el) => el?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 10, fill: "forwards", delay: 650 }));
       [eyeRight2, eyeLeft2].forEach((el) => el?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 10, fill: "forwards", delay: 650 }));
 
@@ -64,27 +56,55 @@ export default function AvatarSvg() {
       };
       const blinkTimer = setTimeout(blink, 1000);
 
-      const onMove = (e) => {
-        const mouseX = e.clientX / window.innerWidth;
-        const mouseY = e.clientY / window.innerHeight;
-        const moveX = (mouseX - 0.5) * 8; // slightly stronger
-        const moveY = (mouseY - 0.5) * 8;
+      const setTransform = (el, tx = 0, ty = 0, rot = 0) => {
+        if (!el) return;
+        el.style.transform = `translate(${tx}%, ${ty}%) rotate(${rot}deg)`;
+      };
 
-        if (face) face.style.transform = `translate(${moveX / 3}%, ${moveY / 3}%)`;
-        if (innerFace) innerFace.style.transform = `translate(${moveX / 4}%, ${moveY / 4}%)`;
-        if (hairFront) hairFront.style.transform = `translate(${moveX / 5}%, ${moveY / 5}%)`;
-        if (hairBack) hairBack.style.transform = `translate(${-moveX / 12}%, ${-moveY / 12}%) rotate(${moveX / 40}deg)`;
+      const onMove = (e) => {
+        // Viewport-relative move
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = (e.clientY / window.innerHeight) * 2 - 1;
+        const moveX = Math.max(-1, Math.min(1, x)) * 8;
+        const moveY = Math.max(-1, Math.min(1, y)) * 8;
+
+        // Move ONLY .body group, not its children!
+        setTransform(bodyGroup, -moveX / 7, -moveY / 7, 0);
+
+        // Face layers for some parallax (optional)
+        setTransform(face, moveX / 3.2, moveY / 3.2, 0);
+        setTransform(innerFace, moveX / 4.0, moveY / 4.0, 0);
+        setTransform(hairFront, moveX / 4.6, moveY / 4.6, 0);
+        if (hairBack)
+          hairBack.style.transform = `translate(${-moveX / 12}%, ${-moveY / 12}%) rotate(${moveX / 40}deg)`;
+
         ears.forEach((el, index) => {
           const direction = index === 0 ? -1 : 1;
-          el.style.transform = `translate(${-moveX / 8}%, ${-moveY / 8}%) rotate(${(direction * moveX) / 18}deg)`;
+          setTransform(el, -moveX / 8, -moveY / 8, (direction * moveX) / 18);
         });
-        [eyebrowRight, eyebrowLeft].forEach((el) => { if (el) el.style.transform = `translateY(${moveY * 2.5}%)`; });
+        [eyebrowRight, eyebrowLeft].forEach((el) => {
+          if (el) el.style.transform = `translateY(${moveY * 2.2}%)`;
+        });
+
+        // DO NOT transform .neck, .top, .shoulder separately! They’re grouped in .body.
       };
-      document.addEventListener("mousemove", onMove);
+
+      const onLeave = () => {
+        [face, innerFace, hairFront, hairBack, eyebrowRight, eyebrowLeft, bodyGroup].forEach((el) => {
+          if (el) el.style.transform = "";
+        });
+        ears.forEach((el) => (el.style.transform = ""));
+      };
+
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("mousemove", onMove, { passive: true });
+      window.addEventListener("blur", onLeave);
 
       return () => {
         clearTimeout(blinkTimer);
-        document.removeEventListener("mousemove", onMove);
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("blur", onLeave);
       };
     }
   }, []);
@@ -98,22 +118,17 @@ export default function AvatarSvg() {
           </clipPath>
         </defs>
 
-        {/* background area (brand color) */}
         <path className="bg" d="M39 153.73s31.57 19.71 77.26 15.21 100.18-37.23 90.36-72.33-10.51-57-35.28-63-50.22 17-76.31 20-60.12-15.88-78.32 2.51S-4.88 125.2 39 153.73z" />
 
         <g clipPath="url(#background-clip)">
           <g className="me">
             <g className="body">
               <path className="shadow" d="M130,40c6,4,14,10,18,20s4,16,4,16-3,8-6,12-7,9-7,9-4-7-8-8.5c-4-2.5-7,6-10,7s-12,3-16,2-14-4-18-5c-4-1.5-7-2-9-5s-3-7-2-9,2-6,2-6l-5-3c-3-2.5-3,6-3,6s-4-4-6-6c-2.5-2.5-2-9,1.5-11.5s7-5,13-6.5,16-9,16-9,11-9,22-9S125,43,127,40Z" opacity="0.12" style={{ isolation: "isolate" }} />
-              {/* Back Hair */}
               <path className="hair-back hair" d="M125,40c6,4,14,10,18,20s4,16,4,16-3,8-6,12-7,9-7,9-4-7-8-8.5c-4-2.5-7,6-10,7s-12,3-16,2-14-4-18-5c-4-1.5-7-2-9-5s-3-7-2-9,2-6,2-6l-5-3c-3-2.5-3,6-3,6s-4-4-6-6c-2.5-2.5-2-9,1.5-11.5s7-5,13-6.5,16-9,16-9,11-9,22-9S125,43,127,40Z" fill="#3C2A17" />
-
-              {/* teal shirt/shoulders */}
               <path className="neck" d="M114.26 143.16v-5a9.22 9.22 0 10-18.43 0v5c-15.27 2.84-24.74 15.08-24.74 27.33H139c0-12.24-9.5-24.49-24.74-27.33z" fill="#e4e2d8" />
               <path className="top" d="M112.61 160c-35.17 0-30.36-35-30.36 20.84h15.35l30-2.14c-.05-55.79 5.17-18.7-29.99-18.7z" strokeWidth="1" />
               <path className="shoulder" d="M90.82 142.87c-21 1.84-34.37 19.5-34.37 40h34.37z" />
               <path className="shoulder" d="M119.23 142.67c20.76 1.85 34 19.6 34 40.2h-34z" />
-
             </g>
 
             <path className="shadow" d="M95.82 122.36h18.41v14.31s-10.5 5.54-18.41 0z" fill="#e9d0c2" />

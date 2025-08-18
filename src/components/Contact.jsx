@@ -26,8 +26,12 @@ export default function Contact() {
     try {
       setIsSending(true);
       setIsError(false);
-      const res = await axios.post(`${API_URL}/send-email`, data);
-      setUploadMessage(res?.data?.message || "Email sent successfully!");
+      if (API_URL) {
+        const res = await axios.post(`${API_URL}/send-email`, data);
+        setUploadMessage(res?.data?.message || "Email sent successfully!");
+      } else {
+        setUploadMessage("Form submitted (demo) — set VITE_API_URL to enable email.");
+      }
     } catch (err) {
       setIsError(true);
       setUploadMessage(err?.response?.data?.message || "Something went wrong, please try again later");
@@ -46,14 +50,13 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-container text-center">
-      <h2 className="section-title justify-center" data-aos="fade-up">What's Next?</h2>
-      <h3 className="text-4xl font-bold text-lightest-slate mb-4" data-aos="fade-up" data-aos-delay="50">Get In Touch</h3>
-      <p className="text-slate max-w-lg mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">
-        Let’s Chat! Whether you have a question, a project idea, or just want to connect, I’m always happy to hear from you.
-        Drop me a message, and I’ll be in touch soon!
+      <h2 className="section-title justify-center">What's Next?</h2>
+      <h3 className="text-4xl font-bold text-lightest-slate mb-4">Get In Touch</h3>
+      <p className="text-slate max-w-lg mx-auto mb-12">
+        Let’s chat! Whether you have a question, a project idea, or just want to connect, I’m always happy to hear from you.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto space-y-6" data-aos="fade-up" data-aos-delay="150">
+      <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto space-y-6">
         <div>
           <input
             {...register("name")}

@@ -2,8 +2,8 @@ export const projects = [
   {
     title: "Media Management Platform",
     description: [
-      "Tackled complexities of media planning across diverse channels where errors and compliance issues arise.",
-      "Streamlined the process to minimize errors and ensure compliance, enabling teams to focus on strategy and creativity."
+      "Tackled the complexities of media planning across diverse channels.",
+      "Streamlined process to minimize errors and ensure compliance."
     ],
     techStack: ["Angular", ".NET Framework", "SQL Server", "Microsoft IIS", "Firebase", "CI/CD"],
     image: "/assets/media-management-platform.webp",
@@ -12,8 +12,8 @@ export const projects = [
   {
     title: "Smile Analysis Web Application",
     description: [
-      "Smile detection app for elderly residents using CV + ML (Python, OpenCV).",
-      "Angular frontend + Flask backend for real-time analysis and feedback."
+      "Smile detection app for elderly residents using CV + ML.",
+      "Angular frontend + Flask backend for real-time analysis."
     ],
     techStack: ["Angular", "Python", "SQL Server", "AWS"],
     image: "/assets/smile-project.webp",
@@ -33,10 +33,9 @@ export const projects = [
     title: "DocuQuery AI",
     description: [
       "AI-powered document Q&A for uploaded PDFs.",
-      "Angular frontend + Flask backend; implemented role-based access control.",
-      "Seamless document processing and querying experience."
+      "Role-based access control and smooth document processing."
     ],
-    techStack: ["Angular", "Tailwind CSS", "Flask (Python)", "MongoDB", "AWS"],
+    techStack: ["Angular", "Tailwind CSS", "Flask", "MongoDB", "AWS"],
     image: "/assets/docu-query-ai.webp",
     aosImage: "fade-left",
   },

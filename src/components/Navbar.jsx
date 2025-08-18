@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-
+import Logo from "../assets/logo.png";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -27,7 +27,7 @@ export default function Navbar() {
           <div className="flex justify-between h-20">
             <div className="flex items-center">
               <a href="/" className="text-xl font-bold text-brand hover:brightness-95 transition">
-                <img src="/assets/logo.png" alt="logo" className="h-8 w-8" />
+                <img src={Logo} alt="logo" className="h-30 w-30 mt-3"/>
               </a>
             </div>
 
