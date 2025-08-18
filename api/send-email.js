@@ -1,11 +1,13 @@
-// api/send-email.js
-const sgMail = require("@sendgrid/mail");
-const { z } = require("zod");
+// api/send-email.js (ESM)
+import sgMail from "@sendgrid/mail";
+import { z } from "zod";
 
-if (!process.env.SENDGRID_API_KEY) {
-  console.warn("SENDGRID_API_KEY is not set.");
-} else {
+const DEBUG = process.env.DEBUG_MAILER === "1";
+
+if (process.env.SENDGRID_API_KEY) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+} else {
+  console.warn("SENDGRID_API_KEY is not set");
 }
 
 const bodySchema = z.object({
@@ -17,7 +19,7 @@ const bodySchema = z.object({
 const escapeHtml = (str = "") =>
   str.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.setHeader("Allow", "POST, OPTIONS");
     return res.status(204).end();
@@ -27,7 +29,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  // Handle body for different runtimes
+  // Handle raw/string body if needed
   let body = req.body;
   if (!body || typeof body === "string") {
     try {
@@ -39,7 +41,10 @@ module.exports = async (req, res) => {
 
   const parsed = bodySchema.safeParse(body);
   if (!parsed.success) {
-    return res.status(400).json({ message: "Invalid input.", issues: parsed.error.flatten().fieldErrors });
+    return res.status(400).json({
+      message: "Invalid input.",
+      issues: parsed.error.flatten().fieldErrors,
+    });
   }
 
   const { name, email, message } = parsed.data;
@@ -57,7 +62,7 @@ module.exports = async (req, res) => {
   try {
     const [resp] = await sgMail.send({
       to: process.env.TO_EMAIL || process.env.FROM_EMAIL,
-      from: { email: process.env.FROM_EMAIL, name: "Portfolio Contact" }, // must be a verified Single Sender
+      from: { email: process.env.FROM_EMAIL, name: "Portfolio Contact" }, // must be verified in SendGrid
       replyTo: { email, name },
       subject,
       text,
@@ -69,7 +74,16 @@ module.exports = async (req, res) => {
       id: resp?.headers?.["x-message-id"] || null,
     });
   } catch (err) {
-    console.error("SendGrid error:", err?.response?.body || err.message || err);
-    return res.status(500).json({ message: "Failed to send email. Please try again later." });
+    const sgDetail =
+      err?.response?.body?.errors?.map((e) => e.message).join("; ") ||
+      err?.response?.body ||
+      err.message ||
+      "Unknown error";
+
+    console.error("SendGrid error:", sgDetail);
+
+    return res.status(500).json({
+      message: DEBUG ? `Mailer error: ${sgDetail}` : "Failed to send email. Please try again later.",
+    });
   }
-};
+}
