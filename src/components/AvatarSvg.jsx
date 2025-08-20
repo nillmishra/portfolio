@@ -9,7 +9,6 @@ export default function AvatarSvg() {
     const container = ref.current;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const q = (sel) => container.querySelector(sel);
-
     const me = q(".me");
     const head = q(".head");
     const hair = q(".hair");
